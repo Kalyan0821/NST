@@ -10,7 +10,7 @@ Neural Style Transfer with TensorFlow
 VGG 19 pre-trained on ImageNet data, max-pooling replaced with average-pooling, last 3 FC layers removed 
 
 ##  ___**Conclusion**___
-Neural Style transfer was successful, and this can be seen by going through the generated images in sequence (**iter10** to **iter100**). The final image matches both the content of the Japanese garden and the style of the Picasso portrait
+Neural Style transfer was successfully implemented, and this can be seen by going through the generated images in sequence (**iter10** to **iter100**). Only 100 update iterations were carried out due to the limited computing power of my CPU. Still, the final image matches both the content of the Japanese garden and the style of the Picasso portrait. 
 
 ##  ___**Papers**___
 * VGGNet: https://arxiv.org/abs/1409.1556
