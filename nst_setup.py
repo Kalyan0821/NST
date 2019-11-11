@@ -6,27 +6,29 @@ import tensorflow as tf
 from keras.applications.vgg19 import VGG19  # To use the pre-trained weights from this model
 
 mean_RGB = np.array([123.68, 116.779, 103.939]).reshape((1, 1, 1, 3))  # These were the RGB mean values over the ImageNet dataset that VGG19 was trained on
-IM_SHAPE = (500, 500)  # All images will be reshaped to 500 X 500 X 3
+
 num_iterations = 100  # Number of optimization steps
 
 tf.reset_default_graph()
 # Get the VGG19 pre-trained Keras model. This will be used to obtain content and style representations 
-cnn = VGG19(include_top=False, weights='imagenet', input_shape=IM_SHAPE+(3,))   
+cnn = VGG19(include_top=False, weights='imagenet', input_shape=(None, None, 3))   
 
-def setup_image(raw_image, target_shape=IM_SHAPE):
+def setup_image(raw_image):
     """Input: (a X b X 3) image 
-      Main Output: RGB mean-centered np.array of size (1 X 500 X 500 X 3)"""
-    resized_raw = raw_image.resize(target_shape)
-    resized_raw = np.reshape(resized_raw, (1,)+target_shape+(3,))
-    image = resized_raw - mean_RGB
-    return image, resized_raw
+      1st Output: RGB mean-centered np.array of size (1 X a X b X 3)
+      2nd Output: np.array of size (1 X a X b X 3)"""
+    nx, ny = raw_image.size
+    reshaped_raw = np.reshape(raw_image, (1, ny, nx, 3))
+    image = reshaped_raw - mean_RGB
+    return image, reshaped_raw
 
 def presentable(image):
-    """Input: (1 X 500 X 500 X 3) np.array, assumed to be RGB mean-centered
-      Output: (500 X 500 X 3) image with RGB mean values re-added"""
+    """Input: (1 X a X b X 3) np.array, assumed to be RGB mean-centered
+      Output: (a X b X 3) image with RGB mean values re-added"""
     image1 = image + mean_RGB
     G = np.clip(image1[0], 0, 255).astype('uint8')
     return G
+
 
 def pretrained_weights(layer_name):
     """Input: String specifying a layer name of the VGG19 Keras model
