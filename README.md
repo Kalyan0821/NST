@@ -1,4 +1,3 @@
-# myelinfoundry-challenge
 Neural Style Transfer with TensorFlow
 
 ##  ___**Solution**___
