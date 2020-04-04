@@ -1,6 +1,6 @@
 Neural Style Transfer with TensorFlow
 
-##  ___**Solution**___
+##  ___**Overview**___
 1. The code for Neural Style Transfer is in the **NST_Tensorflow** Jupyter Notebook. The Python file **nst_setup**, which builds up the Neural Network, is automatically called by the Notebook
 2. The provided content and style images reside in the **challenge** folder
 3. All 10 images generated while the model was running (1 after every 10th iteration, 100 iterations in total) are in the **Generated_Images** folder. The *final output image* matching both content and style is named **iter100**, and is in the same folder
